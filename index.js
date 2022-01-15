@@ -7,13 +7,20 @@ function newImage(url, left, bottom){
     document.body.append(object)
     return object
 }
-
-function newItem(url, left, bottom){
-    let item = newImage(url, left, bottom)
+function addToInventory(url){
+    let inventoryItem = document.createElement('img');
+    inventoryItem.src = url;
+    inventory.append(inventoryItem);
 }
-
+function newItem(url, left, bottom){
+    let item = newImage(url, left, bottom);
+    item.addEventListener('click', function(){
+        item.remove();
+        addToInventory(url);
+    })
+}
+let inventory = document.createElement('div');
 function newInventory(){
-    let inventory = document.createElement('div')
     inventory.style.position = 'fixed'
     inventory.style.bottom = '0px';
     inventory.style.left = '0px'
@@ -26,6 +33,7 @@ function newInventory(){
     inventory.style.border = '2px solid black'
     inventory.style.backgroundColor = 'brown'
     document.body.append(inventory)
+    return inventory;
 }
 
 newInventory()
